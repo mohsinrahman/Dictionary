@@ -19,13 +19,16 @@ describe('SearchBar', () => {
   })
 })
 
-it('Test for empty string', () => {
+it('Test for empty string', async () => {
  render(<SearchBar />);
-  const element = screen.getByRole("textbox")
-  const btnElement = screen.getByRole("button")
-  const btn = screen.getByText(/Find/i);
-  const expectedErrorMsg = 'Input field cannot be blank!';
-  fireEvent.click(btnElement);
+  //const element = screen.getByRole("textbox")
+  //const btnElement = screen.getByRole("button")
+  await userEvent.click(screen.getByRole("button"))
+  const elp = await screen.findByText("Input field cannot be blank!");
+  expect(elp).toBeInTheDocument();
+  //const btn = screen.getByText(/Find/i);
+  //const expectedErrorMsg = 'Input field cannot be blank!';
+  //fireEvent.click(btnElement);
 
   //expect("Input field cannot be blank!").fireEvent.click( btn );
   //fireEvent.change(element, {target: {value: 'Input field cannot be blank!'}})

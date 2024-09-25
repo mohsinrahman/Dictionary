@@ -74,7 +74,10 @@ const handleChange = (e) => {
    return(
 <>
 <h1 key={index} className='text'>{i.phonetic} </h1>
-{/* {console.log(i.phonetics[1].audio)} */}
+ {console.log(i.meanings[1].definitions[0].definition)} 
+ {
+  i.meanings[1].definitions[0].definition ? (<><h3>Definition:</h3> <p>{i.meanings[1].definitions[0].definition} </p></>) : (<p>Not Available</p>)
+ }
 { i.phonetics.length > 0 && i.phonetics[1].audio && (<section className='audio'>
   <p>Audio:</p>
 {/*   </section><audio type="audio/mpeg" src={i.phonetics[1].audio} controls autoPlay width="100" style={{height: 20 + 'em'}}/>
