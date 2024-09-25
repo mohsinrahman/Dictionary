@@ -9,7 +9,7 @@ const [error, setError] = React.useState(false)
 function handleSubmit(event) {
 event.preventDefault();
 const value = inputRef.current.value
-
+/* Added 1st comment */
   if (!value) {
     setError(true)
   }
