@@ -9,7 +9,6 @@ const [error, setError] = React.useState(false)
 function handleSubmit(event) {
 event.preventDefault();
 const value = inputRef.current.value
-/* Added 1st comment */
   if (!value) {
     setError(true)
   }
@@ -62,43 +61,37 @@ const handleChange = (e) => {
   
    </form>
    {error && <p> Input field cannot be blank!</p>}
-
-
-
- {info.map((i, index) => { 
-
- 
- 
-   if(i.phonetic != undefined){
-    
+   {console.log(info.title)}
+   {Array.isArray(info) ? info.map((i, index) => { 
+   if(i.phonetic != undefined){   
    return(
-<>
-<h1 key={index} className='text'>{i.phonetic} </h1>
- {console.log(i.meanings[1].definitions[0].definition)} 
+  <>
+  <h1 key={index} className='text'>{i.phonetic} </h1>
  {
+  i.meanings.map((defs ) => {
+     return defs.definitions.map((def,indx) => { 
+       return (def.definition ? (<><h3 key={indx}>Definition:</h3> <p>{def.definition}</p> </>) : <h3>Not Available</h3> )     
+ })
+ } )}
+ {/* {
   i.meanings[1].definitions[0].definition ? (<><h3>Definition:</h3> <p>{i.meanings[1].definitions[0].definition} </p></>) : (<p>Not Available</p>)
- }
-{ i.phonetics.length > 0 && i.phonetics[1].audio && (<section className='audio'>
-  <p>Audio:</p>
+ } */}
+ 
+{ i.phonetics.length > 0 && i.phonetics[1] && i.phonetics[1].audio ? (<section className='audio'>
+  <h3>Audio:</h3>
 {/*   </section><audio type="audio/mpeg" src={i.phonetics[1].audio} controls autoPlay width="100" style={{height: 20 + 'em'}}/>
  */}  
- <audio controls autoPlay muted>
+  <audio controls autoPlay muted>
   <source src={i.phonetics[1].audio} type="audio/ogg" />
   <source src={i.phonetics[1].audio} type="audio/mpeg"/>
   Your browser does not support the audio element.
   </audio>
-
-</section>)
-
+  </section>)
+  : <h3>Audio is not available</h3>
 }
-
 </>
-
-   ) 
-    
-   
-   }
-})} 
+  )} 
+}) : (<h3>{info.title}</h3>)} 
 
     </div>
   )
